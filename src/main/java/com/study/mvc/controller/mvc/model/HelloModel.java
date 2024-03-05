@@ -1,4 +1,4 @@
-package com.study.mvc.model;
+package com.study.mvc.controller.mvc.model;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,9 +6,7 @@ import lombok.Getter;
 @Builder
 @Getter
 public class HelloModel {
-
     private String name1;
     private String name2;
     private String name3;
-
 }
