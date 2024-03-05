@@ -1,6 +1,6 @@
 package com.study.mvc.controller;
 
-import com.study.mvc.model.HelloModel;
+import com.study.mvc.controller.mvc.model.HelloModel;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

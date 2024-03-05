@@ -2,9 +2,8 @@ package com.study.mvc.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.study.mvc.dto.StudentReqDto;
-import com.study.mvc.dto.StudentRespDto;
-import com.study.mvc.entity.Student;
+import com.study.mvc.controller.mvc.dto.StudentReqDto;
+import com.study.mvc.controller.mvc.entity.Student;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
