@@ -10,6 +10,7 @@ public class CarRepositoryImpl implements CarRepository{
 
     @Override
     public List<String> getCraNames() {
+
         return List.of("아반떼", "쏘나타");
     }
 
