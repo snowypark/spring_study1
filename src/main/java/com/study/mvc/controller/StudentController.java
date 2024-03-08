@@ -2,33 +2,35 @@ package com.study.mvc.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.study.mvc.controller.mvc.dto.StudentReqDto;
-import com.study.mvc.controller.mvc.entity.Student;
+import com.study.mvc.dto.StudentReqDto;
+import com.study.mvc.entity.Student;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.spi.ObjectFactoryBuilder;
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 public class StudentController {
+
 
     @PostMapping("/student")
     public ResponseEntity<?> addStudent(@CookieValue(required = false) String students, @RequestBody Student student) throws JsonProcessingException, UnsupportedEncodingException {
         List<Student> studentList = new ArrayList<>();
         int lastId = 0;
+        ObjectMapper objectMapper = new ObjectMapper();
 
         System.out.println(students);
 
         if(students != null) {
             if(!students.isBlank()) {
-                ObjectMapper objectMapper = new ObjectMapper();
+
                 for(Object object : objectMapper.readValue(students, List.class)) {
                     Map<String, Object> studentMap = (Map<String, Object>) object;
                     studentList.add(objectMapper.convertValue(studentMap, Student.class));
@@ -40,12 +42,12 @@ public class StudentController {
         student.setStudentId(lastId + 1);
         studentList.add(student);
 
-        ObjectMapper newStudentList = new ObjectMapper();
-        String newStudents = newStudentList.writeValueAsString(studentList);
+        String studentListJson = objectMapper.writeValueAsString(studentList);
 
-        System.out.println(newStudents);
+        System.out.println(studentListJson);
+
         ResponseCookie responseCookie = ResponseCookie
-                .from("students", URLEncoder.encode(newStudents, "UTF-8"))
+                .from("students", URLEncoder.encode(studentListJson, "UTF-8"))
                 .httpOnly(true)
                 .secure(true)
                 .path("/")
