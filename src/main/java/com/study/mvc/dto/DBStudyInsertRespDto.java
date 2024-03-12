@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Builder
 @Data
-public class DBStudyInsertResDto {
+public class DBStudyInsertRespDto {
 
     private int id;
     private String name;

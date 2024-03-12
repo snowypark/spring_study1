@@ -20,11 +20,11 @@ public class DBController {
 
     @GetMapping("/select/study/{id}")
     public ResponseEntity<?> selectStudy(@PathVariable int id) {
-        return ResponseEntity.ok(dbStudyService.findStudyById(id));
 
+        return ResponseEntity.ok(dbStudyService.findStudyById(id));
     }
 
-    @GetMapping("/select/study")
+    @GetMapping("/select/study")    // ?name=김준일
     public ResponseEntity<?> selectStudy(@RequestParam String name) {
         return ResponseEntity.ok(dbStudyService.findStudyByName(name));
     }
@@ -40,21 +40,32 @@ public class DBController {
     }
 
     @PutMapping("/update/study/{id}")
-    public ResponseEntity<?> putStudy(@PathVariable int id,
-                                         @RequestBody DBStudyReqDto dbStudyReqDto){
-        // 전체 수정 (빈값 오면 빈값 적용)
+    public ResponseEntity<?> putStudy(
+            @PathVariable int id,
+            @RequestBody DBStudyReqDto dbStudyReqDto) {
+        // 전체 수정 {nickname: aaa, password: 1234} => {nickname: "", password: 1111} => {nickname: "", password: 1111}
 
         return ResponseEntity.ok(dbStudyService.putById(id, dbStudyReqDto));
-
     }
 
     @PatchMapping("/update/study/{id}")
-    public ResponseEntity<?> patchStudy(@PathVariable int id,
-                                         @RequestBody DBStudyReqDto dbStudyReqDto){
-        // 부분 수정 (빈값 들어오면 적용X)
+    public ResponseEntity<?> patchStudy(
+            @PathVariable int id,
+            @RequestBody DBStudyReqDto dbStudyReqDto) {
+        // 부분 수정 {nickname: aaa, password: 1234} => {nickname: "", password: 1111} => {nickname: aaa, password: 1111}
 
         return ResponseEntity.ok(dbStudyService.patchById(id, dbStudyReqDto));
-
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
